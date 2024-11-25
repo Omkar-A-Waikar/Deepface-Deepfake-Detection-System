@@ -1,0 +1,115 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+header {
+    background-color: #112D4E;
+    padding: 10px 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.login-btn {
+    background-color: #3F72AF;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.main-section {
+    background: linear-gradient(to right, #112D4E, #3F72AF);
+    color: #FFF;
+    text-align: center;
+    padding: 360px 20px;
+}
+
+.main-content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.upload-btn {
+    background-color: #3F72AF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.features-section, .analysis-section, .additional-features {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.feature-cards, .analysis-features, .feature-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature-card, .analysis-item, .icon-card {
+    background-color: #F9F9F9;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-card {
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    background-color: #112D4E;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.footer-note {
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    background-color: #0B2137;
+}
