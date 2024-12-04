@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!oz%cc6e#o5c4x@y4jwre)6*=o$t5fpmw+&^jlvh47_9abv+ja'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'main.d2py63ywfn7iq5.amplifyapp.com', 'deepfacedeepfakedetection.com']
 
