@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-!oz%cc6e#o5c4x@y4jwre)6*=o$t5fpmw+&^jlvh47_9abv+ja
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'main.d2py63ywfn7iq5.amplifyapp.com', 'deepfacedeepfakedetection.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nbtry2.d7039wx18bcl3.amplifyapp.com', 'deepfacedeepfakedetection.com']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -66,7 +66,7 @@ ROOT_URLCONF = 'deepface.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / "UI" / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
