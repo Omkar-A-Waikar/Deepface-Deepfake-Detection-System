@@ -31,10 +31,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!oz%cc6e#o5c4x@y4jwre)6*=o$t5fpmw+&^jlvh47_9abv+ja'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'main.d2py63ywfn7iq5.amplifyapp.com', 'deepfacedeepfakedetection.com']
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Application definition
 
@@ -47,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'accounts',
-    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -126,9 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'home/static'),
+    os.path.join(BASE_DIR, 'home', 'static'),
 ]
 
 
@@ -139,3 +141,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # django_project/settings.py
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_REGION = os.environ.get('CUSTOM_AWS_REGION', 'us-east-1')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('deepfakes3')
+AWS_ACCESS_KEY_ID = os.environ.get('AKIAYSE4NV2HEU64FBN2')
+AWS_SECRET_ACCESS_KEY = os.environ.get('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')
