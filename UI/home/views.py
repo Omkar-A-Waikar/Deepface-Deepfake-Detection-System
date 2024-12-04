@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home/index.html')
 
 def photo_deepfake(request):
     return render(request, 'home/photo_deepfake.html')
@@ -18,7 +18,3 @@ def faq_audio(request):
 
 def contact(request):
     return render(request, 'home/contact.html')
-
-
-
-
