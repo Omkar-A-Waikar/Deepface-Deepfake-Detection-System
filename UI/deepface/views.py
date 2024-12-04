@@ -1,15 +1,19 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .forms import ImageUploadForm
-from .model_utils import test_single_image  # 假设你将 test_single_image 函数放在 utils.py 中
+from .model_utils import ImageClassifier  # Import the ImageClassifier class
+
+# Initialize the classifier once to avoid reloading the model for each request
+model_path = "F:/FF_Dataset/outputs/final_model"
+classifier = ImageClassifier(model_path)
 
 def classify_image(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data['image']
-            # 调用你的模型预测函数
-            predicted_label, confidence_score = test_single_image(image)
+            # Use the classifier's predict method
+            predicted_label, confidence_score = classifier.predict(image)
             return JsonResponse({
                 'predicted_label': predicted_label,
                 'confidence_score': confidence_score
