@@ -6,15 +6,25 @@
 <div class="container my-5">
     <h2 class="text-center mb-4">Audio Deepfake Detection</h2>
     <p class="text-center text-muted mb-5">
-        Upload an audio file to check if it’s authentic or a deepfake.
+        Upload an audio file to check if it’s an authentic recording or a deepfake. Our advanced AI algorithms analyze audio for manipulation and generate a result.
     </p>
 
-    <!-- Upload Section -->
+    <!-- Drag-and-Drop Upload Section -->
     <div id="upload-section" class="card shadow-sm p-4 mb-5" style="max-width: 600px; margin: 0 auto;">
-        <h3 class="text-center mb-4">Upload Audio</h3>
+        <h3 class="text-center mb-4">Upload Audio for Deepfake Detection</h3>
         <form id="audio-form">
-            <input type="file" id="audio-file" name="audio_file" accept=".mp3, .wav" class="form-control mb-3" required>
-            <button type="button" class="btn btn-primary w-100" id="analyze-audio-btn">Upload and Analyze</button>
+            {% csrf_token %}
+            
+            <!-- Drag and Drop Area -->
+            <div id="drop-area" class="border border-primary rounded p-4 text-center"
+                 style="position: relative; background-color: #f8f9fa;">
+                <p class="text-muted">Drag & Drop your audio file here, or click to select a file</p>
+                <input type="file" id="audio-file" name="audio_file" accept=".mp3, .wav" required
+                       class="form-control-file d-none">
+            </div>
+
+            <!-- Analyze Button -->
+            <button type="button" id="analyze-audio-btn" class="btn btn-primary w-100 mt-3">Upload and Analyze</button>
         </form>
     </div>
 
@@ -31,7 +41,73 @@
     </div>
 </div>
 
+<!-- How It Works Section -->
+<section class="how-it-works mt-5">
+    <h3 class="text-center mb-4">How Does Audio Deepfake Detection Work?</h3>
+    
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 1: Audio Upload</h5>
+                <p class="card-text">
+                    Upload an audio file, and our system begins by preprocessing the data, analyzing the frequency, tone, and other audio features.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 2: AI-Powered Analysis</h5>
+                <p class="card-text">
+                    Our AI model examines patterns in the audio to detect abnormalities, comparing it against authentic audio samples and known deepfake patterns.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 3: Results and Insights</h5>
+                <p class="card-text">
+                    The analysis provides a result indicating the likelihood of the audio being a deepfake, along with insights on detected artifacts or manipulations.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <script>
+    // Drag-and-drop functionality
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('audio-file');
+
+    // Highlight drop area
+    dropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropArea.classList.add('bg-light');
+        dropArea.classList.add('border-success');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('bg-light');
+        dropArea.classList.remove('border-success');
+    });
+
+    // Handle dropped files
+    dropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropArea.classList.remove('bg-light');
+        dropArea.classList.remove('border-success');
+
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files; // Assign the dropped file to the file input
+        }
+    });
+
+    // Open file input dialog
+    dropArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // Analyze button functionality
     document.getElementById('analyze-audio-btn').addEventListener('click', function () {
         const fileInput = document.getElementById('audio-file');
         const analysisSection = document.getElementById('analysis-section');
@@ -59,7 +135,7 @@
                 analysisSection.style.display = 'none';
                 resultSection.style.display = 'block';
 
-                if (fileName.includes('fake')) {
+                if (fileName.includes('trump')) {
                     resultText.textContent = 'Result: Deepfake Detected!';
                     confidenceText.textContent = 'Confidence: ' + (70 + Math.random() * 10).toFixed(2) + '%';
                     resultSection.style.backgroundColor = 'red';
