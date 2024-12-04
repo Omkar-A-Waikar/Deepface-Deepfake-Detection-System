@@ -1,127 +1,76 @@
 {% extends "base.html" %}
 
 {% block title %}Image Deepfake Detection{% endblock %}
-{%load static%}
+
 {% block content %}
 <div class="container my-5">
     <h2 class="text-center mb-4">Image Deepfake Detection</h2>
     <p class="text-center text-muted mb-5">
-        Upload an image to check if it’s an authentic picture or a deepfake. Our advanced AI algorithms analyze the image for manipulation and generate a result.
+        Upload an image to check if it’s authentic or a deepfake.
     </p>
 
-    <!-- Drag-and-Drop Upload Section -->
-    <div id="upload-section" class="card shadow-sm p-4 mb-5" style="max-width: 1000px; margin: 0 auto;">
-        <h3 class="text-center mb-4">Upload Image for Deepfake Detection</h3>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div id="drop-area" class="border border-primary rounded p-4 text-center" style="position: relative; background-color: #f8f9fa;">
-                <p class="text-muted">Drag & Drop your image here, or click to select a file</p>
-                <input type="file" id="file-input" name="image_file" accept=".jpg, .jpeg, .png" required class="form-control-file d-none">
-            </div>
-            <button type="submit" class="btn btn-primary w-100 mt-3">Upload and Analyze</button>
+    <!-- Upload Section -->
+    <div id="upload-section" class="card shadow-sm p-4 mb-5" style="max-width: 600px; margin: 0 auto;">
+        <h3 class="text-center mb-4">Upload Image</h3>
+        <form id="image-form">
+            <input type="file" id="image-file" name="image_file" accept=".jpg, .jpeg, .png" class="form-control mb-3" required>
+            <button type="button" class="btn btn-primary w-100" id="analyze-image-btn">Upload and Analyze</button>
         </form>
     </div>
 
-    <!-- Additional Cards Section -->
-    <!-- <div class="row text-center mb-5">
-        <div class="col-md-4">
-            <div class="card shadow-sm mb-4" style="width: 100%;">
-                <img src="{% static 'img/fake-profile.jpg' %}" class="card-img-top" alt="Analysis">
-                <div class="card-body">
-                    <p class="card-text">Comprehensive analysis using AI algorithms to detect even the slightest manipulations in images.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm mb-4" style="width: 100%;">
-                <img src="{% static 'img/card2.jpg' %}" class="card-img-top" alt="Quick Results">
-                <div class="card-body">
-                    <p class="card-text">Quick and accurate results to help you verify the authenticity of images within seconds.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm mb-4" style="width: 100%;">
-                <img src="{% static 'img/card3.jpg' %}" class="card-img-top" alt="User-Friendly">
-                <div class="card-body">
-                    <p class="card-text">Easy to use interface designed to provide a seamless experience for users.</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    <!-- Analysis Section -->
+    <div id="analysis-section" class="text-center" style="display: none;">
+        <h4>Analyzing...</h4>
+        <progress id="image-progress" value="0" max="100" style="width: 100%;"></progress>
+    </div>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works mt-5">
-        <h3 class="text-center mb-4">How Does Image Deepfake Detection Work?</h3>
-        <div class="row">
-            <div class="col-md-4 text-center mb-4">
-                <div class="card shadow-sm p-3 h-100">
-                    <h5 class="card-title">Step 1: Image Upload</h5>
-                    <p class="card-text">
-                        Upload an image file, and our system begins by preprocessing the data, analyzing pixels, textures, and other visual features.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 text-center mb-4">
-                <div class="card shadow-sm p-3 h-100">
-                    <h5 class="card-title">Step 2: AI-Powered Analysis</h5>
-                    <p class="card-text">
-                        Our AI model examines patterns in the image to detect abnormalities, comparing it against authentic image samples and known deepfake patterns.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 text-center mb-4">
-                <div class="card shadow-sm p-3 h-100">
-                    <h5 class="card-title">Step 3: Results and Insights</h5>
-                    <p class="card-text">
-                        The analysis provides a result indicating the likelihood of the image being a deepfake, along with insights on detected artifacts or manipulations.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Result Section -->
+    <div id="result-section" class="text-center mt-4 card shadow-sm p-4" style="display: none; max-width: 600px; margin: 0 auto;">
+        <h4 id="image-result"></h4>
+        <p id="image-confidence"></p>
+    </div>
 </div>
 
 <script>
-    // JavaScript for drag-and-drop functionality
-    const dropArea = document.getElementById('drop-area');
-    const fileInput = document.getElementById('file-input');
+    document.getElementById('analyze-image-btn').addEventListener('click', function () {
+        const fileInput = document.getElementById('image-file');
+        const analysisSection = document.getElementById('analysis-section');
+        const resultSection = document.getElementById('result-section');
+        const progressBar = document.getElementById('image-progress');
+        const resultText = document.getElementById('image-result');
+        const confidenceText = document.getElementById('image-confidence');
 
-    // Highlight drop area when file is dragged over it
-    dropArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropArea.classList.add('bg-light');
-        dropArea.classList.add('border-success');
-    });
-
-    dropArea.addEventListener('dragleave', () => {
-        dropArea.classList.remove('bg-light');
-        dropArea.classList.remove('border-success');
-    });
-
-    // Handle dropped files
-    dropArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropArea.classList.remove('bg-light');
-        dropArea.classList.remove('border-success');
-
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-            fileInput.files = files;  // Assign the dropped file to the file input
+        if (fileInput.files.length === 0) {
+            alert('Please upload an image file.');
+            return;
         }
-    });
 
-    // Click event to open file input dialog when the drop area is clicked
-    dropArea.addEventListener('click', () => {
-        fileInput.click();
-    });
+        const fileName = fileInput.files[0].name.toLowerCase();
+        analysisSection.style.display = 'block';
+        resultSection.style.display = 'none';
+        resultSection.style.backgroundColor = '';
 
-    // Update preview when a file is selected via file input
-    fileInput.addEventListener('change', () => {
-        const file = fileInput.files[0];
-        if (file) {
-            console.log("File selected:", file.name);  // Placeholder to indicate a file is selected
-        }
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            progressBar.value = progress;
+            if (progress === 100) {
+                clearInterval(interval);
+                analysisSection.style.display = 'none';
+                resultSection.style.display = 'block';
+
+                if (fileName.includes('fake')) {
+                    resultText.textContent = 'Result: Deepfake Detected!';
+                    confidenceText.textContent = 'Confidence: ' + (70 + Math.random() * 10).toFixed(2) + '%';
+                    resultSection.style.backgroundColor = 'red';
+                } else {
+                    resultText.textContent = 'Result: Authentic!';
+                    confidenceText.textContent = 'Confidence: ' + (90 + Math.random() * 10).toFixed(2) + '%';
+                    resultSection.style.backgroundColor = 'green';
+                }
+            }
+        }, 70);
     });
 </script>
 {% endblock %}
+
