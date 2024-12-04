@@ -1,46 +1,28 @@
 import torch
 from transformers import ViTForImageClassification, ViTImageProcessor
 from PIL import Image
-import matplotlib.pyplot as plt
 import torch.nn.functional as F
+import matplotlib.pyplot as plt
 
 class ImageClassifier:
     def __init__(self, model_path, threshold=0.7):
-        """
-        Initialize the classifier by loading the model and processor.
-        :param model_path: Path to the model directory
-        :param threshold: Confidence threshold for classification
-        """
-        # Load the pre-trained model and processor
         self.model = ViTForImageClassification.from_pretrained(model_path)
         self.processor = ViTImageProcessor.from_pretrained(model_path)
-        # Set the device to GPU if available, otherwise CPU
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
         self.threshold = threshold
 
     def predict(self, image_path):
-        """
-        Predict the label of a single image.
-        :param image_path: Path to the image file
-        :return: Predicted label and confidence score
-        """
-        # Open and process the image
         image = Image.open(image_path).convert("RGB")
         inputs = self.processor(images=image, return_tensors="pt").to(self.device)
 
-        # Set the model to evaluation mode and perform inference
-        self.model.eval()
         with torch.no_grad():
             outputs = self.model(**inputs)
         logits = outputs.logits
-
-        # Calculate probabilities
         probs = F.softmax(logits, dim=-1)
-        fake_prob = probs[0][0].item()  # Assuming index 0 is for FAKE
-        real_prob = probs[0][1].item()  # Assuming index 1 is for REAL
+        fake_prob = probs[0][0].item()
+        real_prob = probs[0][1].item()
 
-        # Determine the predicted label based on the threshold
         if fake_prob > self.threshold:
             predicted_label = 'FAKE'
             confidence_score = fake_prob * 100
