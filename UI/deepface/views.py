@@ -21,3 +21,6 @@ def classify_image(request):
     else:
         form = ImageUploadForm()
     return render(request, 'image_classification/upload.html', {'form': form})
+
+def home(request):
+    return render(request, "home.html")  # Ensure the template exists
