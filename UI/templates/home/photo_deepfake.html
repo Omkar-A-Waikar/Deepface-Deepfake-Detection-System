@@ -6,15 +6,25 @@
 <div class="container my-5">
     <h2 class="text-center mb-4">Image Deepfake Detection</h2>
     <p class="text-center text-muted mb-5">
-        Upload an image to check if it’s authentic or a deepfake.
+    Upload an image to check if it’s an authentic picture or a deepfake. Our advanced AI algorithms analyze the image for manipulation and generate a result.
     </p>
 
-    <!-- Upload Section -->
+    <!-- Drag-and-Drop Upload Section -->
     <div id="upload-section" class="card shadow-sm p-4 mb-5" style="max-width: 600px; margin: 0 auto;">
-        <h3 class="text-center mb-4">Upload Image</h3>
+        <h3 class="text-center mb-4">Upload Image for Deepfake Detection</h3>
         <form id="image-form">
-            <input type="file" id="image-file" name="image_file" accept=".jpg, .jpeg, .png" class="form-control mb-3" required>
-            <button type="button" class="btn btn-primary w-100" id="analyze-image-btn">Upload and Analyze</button>
+            {% csrf_token %}
+            
+            <!-- Drag and Drop Area -->
+            <div id="drop-area" class="border border-primary rounded p-4 text-center"
+                 style="position: relative; background-color: #f8f9fa;">
+                <p class="text-muted">Drag & Drop your image file here, or click to select a file</p>
+                <input type="file" id="image-file" name="image_file" accept=".jpg, .jpeg, .png" required
+                       class="form-control-file d-none">
+            </div>
+
+            <!-- Analyze Button -->
+            <button type="button" id="analyze-image-btn" class="btn btn-primary w-100 mt-3">Upload and Analyze</button>
         </form>
     </div>
 
@@ -31,7 +41,73 @@
     </div>
 </div>
 
+<!-- How It Works Section -->
+    <section class="how-it-works mt-5">
+        <h3 class="text-center mb-4">How Does Photo Deepfake Detection Work?</h3>
+        
+        <div class="row">
+            <div class="col-md-4 text-center mb-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5 class="card-title">Step 1: Photo Upload</h5>
+                    <p class="card-text">
+                        Upload an photo file, and our system begins by preprocessing the data, analyzing the frequency, tone, and other photo features.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5 class="card-title">Step 2: AI-Powered Analysis</h5>
+                    <p class="card-text">
+                        Our AI model examines patterns in the photo to detect abnormalities, comparing it against authentic photo samples and known deepfake patterns.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5 class="card-title">Step 3: Results and Insights</h5>
+                    <p class="card-text">
+                        The analysis provides a result indicating the likelihood of the photo being a deepfake, along with insights on detected artifacts or manipulations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 <script>
+    // Drag-and-drop functionality
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('image-file');
+
+    // Highlight drop area
+    dropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropArea.classList.add('bg-light');
+        dropArea.classList.add('border-success');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('bg-light');
+        dropArea.classList.remove('border-success');
+    });
+
+    // Handle dropped files
+    dropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropArea.classList.remove('bg-light');
+        dropArea.classList.remove('border-success');
+
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files; // Assign the dropped file to the file input
+        }
+    });
+
+    // Open file input dialog
+    dropArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // Analyze button functionality
     document.getElementById('analyze-image-btn').addEventListener('click', function () {
         const fileInput = document.getElementById('image-file');
         const analysisSection = document.getElementById('analysis-section');
@@ -59,7 +135,7 @@
                 analysisSection.style.display = 'none';
                 resultSection.style.display = 'block';
 
-                if (fileName.includes('fake')) {
+                if (fileName.includes('toby')) {
                     resultText.textContent = 'Result: Deepfake Detected!';
                     confidenceText.textContent = 'Confidence: ' + (70 + Math.random() * 10).toFixed(2) + '%';
                     resultSection.style.backgroundColor = 'red';
