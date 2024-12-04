@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}Image Deepfake Detection{% endblock %}
-{%load static%}
+{% load static %}
 {% block content %}
 <div class="container my-5">
     <h2 class="text-center mb-4">Image Deepfake Detection</h2>
     <p class="text-center text-muted mb-5">
-        Upload an image to check if it’s an authentic picture or a deepfake. Our advanced AI algorithms analyze the image for manipulation and generate a result.
+        Upload an image to check if it's an authentic picture or a deepfake. Our advanced AI algorithms analyze the image for manipulation and generate a result.
     </p>
 
     <!-- Drag-and-Drop Upload Section -->
     <div id="upload-section" class="card shadow-sm p-4 mb-5" style="max-width: 1000px; margin: 0 auto;">
         <h3 class="text-center mb-4">Upload Image for Deepfake Detection</h3>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" action="{% url 'photo_deepfake' %}">
             {% csrf_token %}
             <div id="drop-area" class="border border-primary rounded p-4 text-center" style="position: relative; background-color: #f8f9fa;">
                 <p class="text-muted">Drag & Drop your image here, or click to select a file</p>
@@ -20,10 +20,19 @@
             </div>
             <button type="submit" class="btn btn-primary w-100 mt-3">Upload and Analyze</button>
         </form>
+        <!-- Image preview -->
+        <img id="image-preview" src="" alt="Image Preview" class="img-fluid mt-3" style="display: none;">
     </div>
 
+    {% if uploaded_file_url %}
+        <div class="alert alert-success mt-4">
+            <p>Image uploaded successfully! Result: {{ result }}</p>
+            <img src="{{ uploaded_file_url }}" alt="Uploaded Image" class="img-fluid mt-3">
+        </div>
+    {% endif %}
+
     <!-- Additional Cards Section -->
-    <!-- <div class="row text-center mb-5">
+    <div class="row text-center mb-5">
         <div class="col-md-4">
             <div class="card shadow-sm mb-4" style="width: 100%;">
                 <img src="{% static 'img/fake-profile.jpg' %}" class="card-img-top" alt="Analysis">
@@ -34,7 +43,7 @@
         </div>
         <div class="col-md-4">
             <div class="card shadow-sm mb-4" style="width: 100%;">
-                <img src="{% static 'img/card2.jpg' %}" class="card-img-top" alt="Quick Results">
+                <img src="{% static 'img/fake-id.jpg' %}" class="card-img-top" alt="Quick Results">
                 <div class="card-body">
                     <p class="card-text">Quick and accurate results to help you verify the authenticity of images within seconds.</p>
                 </div>
@@ -42,13 +51,13 @@
         </div>
         <div class="col-md-4">
             <div class="card shadow-sm mb-4" style="width: 100%;">
-                <img src="{% static 'img/card3.jpg' %}" class="card-img-top" alt="User-Friendly">
+                <img src="{% static 'img/fake-news.jpg' %}" class="card-img-top" alt="User-Friendly">
                 <div class="card-body">
                     <p class="card-text">Easy to use interface designed to provide a seamless experience for users.</p>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- How It Works Section -->
     <section class="how-it-works mt-5">
@@ -83,9 +92,9 @@
 </div>
 
 <script>
-    // JavaScript for drag-and-drop functionality
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('file-input');
+    const imagePreview = document.getElementById('image-preview');
 
     // Highlight drop area when file is dragged over it
     dropArea.addEventListener('dragover', (e) => {
@@ -108,6 +117,7 @@
         const files = e.dataTransfer.files;
         if (files.length > 0) {
             fileInput.files = files;  // Assign the dropped file to the file input
+            displayImage(files[0]);   // Display the image
         }
     });
 
@@ -120,8 +130,18 @@
     fileInput.addEventListener('change', () => {
         const file = fileInput.files[0];
         if (file) {
-            console.log("File selected:", file.name);  // Placeholder to indicate a file is selected
+            displayImage(file);  // Display the image
         }
     });
+
+    // Function to display the selected image
+    function displayImage(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;  // Set the image source to the file's data URL
+            imagePreview.style.display = 'block'; // Show the image
+        }
+        reader.readAsDataURL(file);  // Read the file as a data URL
+    }
 </script>
 {% endblock %}
