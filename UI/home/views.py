@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'home/index.html')
+    return render(request, 'home.html')
 
 def photo_deepfake(request):
     return render(request, 'home/photo_deepfake.html')
