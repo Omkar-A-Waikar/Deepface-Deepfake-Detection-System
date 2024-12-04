@@ -1,9 +1,12 @@
-# django_project/urls.py
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("home.urls")), 
-    path('accounts/', include('accounts.urls')),
+    path('', views.home, name='home'),
+    # path('faq/photo/', views.faq_photo, name='faq_photo'),
+    # path('faq/audio/', views.faq_audio, name='faq_audio'),
+    path('contact/', views.contact, name='contact'),
+    path('photo-deepfake/', views.photo_deepfake, name='photo_deepfake'),
+    path('audio-deepfake/', views.audio_deepfake, name='audio_deepfake'),
+
 ]
