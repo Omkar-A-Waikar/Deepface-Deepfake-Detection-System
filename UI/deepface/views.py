@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .forms import ImageUploadForm
 import torch
+from torch import Tensor
 from transformers import ViTForImageClassification, ViTImageProcessor
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
@@ -33,7 +34,7 @@ def photo_deepfake(request):
         classifier = ImageClassifier(model_path)
         try:
             predicted_label, confidence_score = classifier.predict(fs.path(filename))
-            if not predicted_label:  # if prediction is empty
+            if not predicted_label:  # if the prediction result is empty
                 predicted_label = 'FAKE'
                 confidence_score = 0.0
         except Exception as e:
