@@ -1,0 +1,276 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deepfake Detection</title>
+    
+        <!-- External CSS - Bootstrap & Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/glightbox/css/glightbox.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/swiper/swiper-bundle.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+        <!-- Inline CSS for Custom Styles -->
+        <style type="text/css">
+           #main-nav {
+  background: transparent;
+  transition: background  250ms ease-in; /*duration of fade transition */
+}
+
+#main-nav.scrolled {
+  background: black;
+}
+.backgroundcolor {
+    background: #68a4c4;
+}
+        /* Background Classes */
+.bg-misinformation {
+    background-image: url('{% static "img/mis-disinformation.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-fake-profiles {
+    background-image: url('{% static "img/fake-profile.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-fake-ids {
+    background-image: url('{% static "img/fake-id.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-impersonation {
+    background-image: url('{% static "img/impersonation.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-nudification {
+    background-image: url('{% static "img/nudification.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-fake-news {
+    background-image: url('{% static "img/fake-news.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-face-analysis {
+    background-image: url('{% static "img/deepfakes.webp" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-audio-analysis {
+    background-image: url('{% static "img/audiofakes.png" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.original {
+        background: url('{% static "img/tom.jpg" %}') center center no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 450px; /* Adjust the height as needed */
+    }
+.audio {
+    background: url('{% static "img/audio.png" %}') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 450px; /* Adjust the height as needed */
+}
+/* Overlay Card Styles */
+.overlay-card {
+    height: 300px; /* Uniform card height */
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.overlay-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    z-index: 2;
+}
+
+.card-img-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+}
+
+/* Default Header */
+.header {
+    background: transparent; /* Transparent background for the homepage */
+    transition: background 0.3s ease;
+    margin-bottom: auto;
+}
+
+/* Dark Background for Other Pages */
+.header-dark {
+    background: #1e4356; /* Dark background color */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+}
+
+.header-dark .nav-link {
+    color: #ffffff; /* White text for dark background */
+}
+
+.header-dark .btn-outline-light {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.header-dark .btn-outline-light:hover {
+    background: #ffffff;
+    color: #343a40;
+}
+
+#header {
+    background: transparent;
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Navbar on Scroll */
+#header.scrolled {
+    background: #1e4356; /* Dark background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+#header.scrolled .nav-link,
+#header.scrolled .sitename {
+    color: #ffffff !important; /* White text */
+}
+
+#header.scrolled .btn-outline-light {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+#header.scrolled .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #1e4356;
+}
+        
+        </style>
+    </head>
+    
+<body>
+     <!-- Updated Navbar -->
+<header id="header" class="header d-flex align-items-center fixed-top navbar-fixed-top
+{% if request.path != '/' %}header-dark{% endif %}">
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+    <!-- Logo -->
+    <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+        <h1 class="sitename">Deepface</h1>
+    </a>
+
+    <!-- Navigation Menu -->
+    <nav id="navmenu" class="navmenu">
+        <ul class="d-flex align-items-center">
+            <li><a href="{% url 'home' %}">Home</a></li>
+
+            <!-- Product Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Product
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                    <li><a class="dropdown-item" href="{% url 'image_upload' %}">Photo Deepfake Detection</a></li>
+                    <li><a class="dropdown-item" href="{% url 'audio_detection' %}">Audio Deepfake Detection</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+
+            <!-- User Authentication Section -->
+            <li class="ms-auto">
+                <div class="d-flex align-items-center">
+                    {% if user.is_authenticated %}
+                        <span class="nav-link text-white me-2">Hi, {{ user.username }}!</span>
+                        <form action="{% url 'logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                        </form>
+                    {% else %}
+                        <a class="nav-link text-white me-2" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link text-white me-2" href="{% url 'signup' %}">Sign Up</a>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+</div>
+</header>
+
+
+<!-- Main Content -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<!-- <div id="preloader"></div> -->
+<!-- Footer -->
+<footer class="bg-dark text-center text-white py-3 ">
+    <p class="mb-0">&copy; 2024 Deepfake Detection. All Rights Reserved.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+    document.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+
+        // Check if scroll position is greater than 50px
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled"); // Add scrolled class
+        } else {
+            header.classList.remove("scrolled"); // Remove scrolled class
+        }
+    });
+</script>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pp5/NekCk96mZz5GVWGa8v2i2Whi1QRXQOzIdJ/3+X3ZwW9UyIXQGzLdGldfylC7" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
+
+

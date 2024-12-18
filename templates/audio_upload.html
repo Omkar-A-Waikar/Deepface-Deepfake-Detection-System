@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Audio Deepfake Detection{% endblock %}
+
+{% block content %}
+<div class="page-title dark-background">
+    <div class="container position-relative">
+      <h1>Audio Detection</h1>
+      <p>Upload an audio file to check if it’s an authentic recording or a deepfake. Our advanced AI algorithms analyze audio for manipulation and generate a result.</p>
+    </div>
+</div>
+<div class="container my-5">
+<div class="container my-5">
+    <!-- <h2 class="text-center mb-4">Audio Deepfake Detection</h2>
+    <p class="text-center text-muted mb-5">
+    </p> -->
+
+    <!-- Drag-and-Drop Upload Section -->
+    <div id="upload-section" class="card shadow-sm p-5 mb-5" style="max-width: 600px; margin: 0 auto;">
+        <!-- <h3 class="text-center mb-4">Upload Audio for Deepfake Detection</h3> -->
+    <!-- File Upload Form -->
+    <form method="POST" enctype="multipart/form-data" class="p-4 shadow rounded bg-light">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="audio_file" class="form-label fw-bold">Upload an Audio File</label>
+            <input type="file" name="audio_file" id="audio_file" class="form-control" accept=".wav,.mp3,.ogg" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Detect</button>
+        </div>
+    </form>
+
+    <!-- Display Results -->
+    {% if result %}
+        <div class="mt-4 text-center">
+            <h4>Prediction: 
+                <span class="badge {% if result == 'Fake' %}bg-danger{% else %}bg-success{% endif %}">{{ result }}</span>
+            </h4>
+            <p class="mt-2">Confidence: <strong>{{ confidence }}%</strong></p>
+        </div>
+    {% endif %}
+</div>
+
+<section class="featured-services section py-5">
+    <div class="container text-center" data-aos="fade-up">
+        <!-- Section Heading -->
+        <h2 class="mb-4">Detect Deep Fake Easily in Seconds</h2>
+        <div class="row gy-4">
+            <!-- Feature 1: Upload Instantly -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-item item-cyan position-relative">
+                    <div class="icon">
+                        <i class="bi bi-upload"></i>
+                    </div>
+                    <h3>Upload Instantly</h3>
+                    <p>Upload your audio and pictures in one click to start detection.</p>
+                </div>
+            </div>
+
+            <!-- Feature 2: Crop Faces Automatically -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-item item-orange position-relative">
+                    <div class="icon">
+                        <i class="bi bi-aspect-ratio"></i>
+                    </div>
+                    <h3>Crop Faces Automatically</h3>
+                    <p>Automatically focuses on faces to enhance detection accuracy.</p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Easy to Use -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-item item-teal position-relative">
+                    <div class="icon">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p>Designed for intuitive user experience, providing results in seconds.</p>
+                </div>
+            </div>
+
+
+            <!-- Feature 4: Privacy & Security -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-item item-red position-relative">
+                    <div class="icon">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h3>Privacy & Security</h3>
+                    <p>Your uploads are secure and processed confidentially for privacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="my-5 text-dark section light-background">
+    <!-- Section Heading -->
+     <div class="container">
+    <h2 class="text-center font-weight-bold mb-4 ">Key features of Audio Fake Detection.</h2>
+    <p class="text-center text-dark mb-5">
+        An audio deepfake is a synthetically generated audio recording that closely mimics a real person's voice, often exhibiting characteristics like unnatural pauses, inconsistent tone and pitch, robotic speech, lack of emotional nuance, mispronunciations, and potential background noise, all created using advanced machine learning algorithms to replicate the target person's speech patterns, accent, and intonation, making it difficult to distinguish from genuine audio. 
+    </p>
+
+    <!-- Image and Analysis Section -->
+    <div class="row mb-5">
+        <!-- Left Side Single Image -->
+        <div class="col-md-6 text-center">
+            <div class="image-container audio border rounded" alt="Deepfake Example"></div>
+            <!-- <p class="mt-2 text-dark">Original Image with Localized Face, Cropped Face, Heatmap, and Overlay</p> -->
+        </div>
+
+        <!-- Right Side Cards -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Highly realistic voice imitation</h5>
+                    <p class="card-text text-dark">
+                    Can closely replicate a person's voice, including their accent, pitch, and inflection, making it sound very authentic.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Generated from a small audio sample</h5>
+                    <p class="card-text text-dark">
+                        Only requires a small amount of audio data from the target person to train the AI model.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Unnatural speech patterns</h5>
+                    <p class="card-text text-dark">
+                        May exhibit awkward pauses, inconsistent rhythm, or abrupt changes in tone that don't align with natural human speech.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Lack of emotional depth</h5>
+                    <p class="card-text text-dark">
+                    Can sound flat or emotionless, failing to convey the full range of human emotions present in genuine speech. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+<section class="how-it-works mt-5">
+    <h3 class="text-center mb-4">How Does Audio Deepfake Detection Work?</h3>
+    
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 1: Audio Upload</h5>
+                <p class="card-text">
+                    Upload an audio file, and our system begins by preprocessing the data, analyzing the frequency, tone, and other audio features.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 2: AI-Powered Analysis</h5>
+                <p class="card-text">
+                    Our AI model examines patterns in the audio to detect abnormalities, comparing it against authentic audio samples and known deepfake patterns.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 3: Results and Insights</h5>
+                <p class="card-text">
+                    The analysis provides a result indicating the likelihood of the audio being a deepfake, along with insights on detected artifacts or manipulations.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<script>
+// JavaScript for drag-and-drop functionality
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+
+// Highlight drop area when file is dragged over it
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('bg-light');
+    dropArea.classList.add('border-success');
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.classList.remove('bg-light');
+    dropArea.classList.remove('border-success');
+});
+
+// Handle dropped files
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('bg-light');
+    dropArea.classList.remove('border-success');
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;  // Assign the dropped file to the file input
+    }
+});
+
+// Click event to open file input dialog when the drop area is clicked
+dropArea.addEventListener('click', () => {
+    fileInput.click();
+});
+
+// Update the file input when a file is selected via file input dialog
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (file) {
+        console.log("File selected:", file.name);  // Placeholder to indicate a file is selected
+    }
+});
+</script>
+{% endblock %}
+

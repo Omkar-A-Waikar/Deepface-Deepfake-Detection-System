@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+<div class="page-title dark-background ">
+    <div class="container position-relative">
+        <h1 class="text-white text-center py-4">Login</h1>
+    </div>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <!-- Display errors -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Please enter a correct username and password.
+                        </div>
+                    {% endif %}
+
+                    <!-- Login Form -->
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        
+                        <!-- Username Field -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username" required>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+
+                        <!-- Additional Links -->
+                        <div class="text-center mt-3">
+                            <small>
+                                Don't have an account? 
+                                <a href="{% url 'signup' %}" class="text-decoration-none">Sign Up</a>
+                            </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Back to Home Link -->
+            <div class="text-center mt-4">
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

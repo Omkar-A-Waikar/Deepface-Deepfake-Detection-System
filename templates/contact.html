@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="page-title dark-background">
+    <div class="container position-relative">
+      <h1>Contact us</h1>
+      <p>  If you have any questions or inquiries, please feel free to contact us. Fill out the form below, and we’ll get back to you as soon as possible.</p>
+      <nav class="breadcrumbs">
+        <ol>
+          <li>Home</li>
+          <li class="current">Contact</li>
+        </ol>
+      </nav>
+    </div>
+</div>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <!-- Contact Form -->
+<section id="contact" class="contact section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+            <!-- Left Info Section -->
+            <div class="col-lg-6">
+                <div class="row gy-4">
+                    <div class="col-lg-12">
+                        <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-geo-alt"></i>
+                            <h3>Address</h3>
+                            <p>A108 Adam Street, New York, NY 535022</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-telephone"></i>
+                            <h3>Call Us</h3>
+                            <p>+1 5589 55488 55</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p>info@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-6">
+                <form method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Enter the subject of your inquiry" required>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="4" placeholder="Enter your message here" required></textarea>
+                        </div>
+    
+                        <div class="col-md-12 text-center mb-3">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </div>
+                </form>
+                {% if success %}
+                    <div class="alert alert-success mt-3">Your message has been sent. Thank you!</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+       
+    </div>
+</div>
+{% endblock %}

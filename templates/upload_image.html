@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-title dark-background">
+    <div class="container position-relative">
+      <h1>Image Detection</h1>
+      <p>Upload an image to check if it's an authentic picture or a deepfake. Our advanced AI algorithms analyze the image for manipulation and generate a result.</p>
+     
+    </div>
+</div>
+<div class="container mt-5">
+   
+    <div id="upload-section" class="card shadow-sm p-4 mb-5" style="max-width: 1000px; margin: 0 auto;">
+        <h2 class="text-center mb-4">Image Deepfake Detection</h2>
+        <h3 class="text-center mb-4">Upload Image for Deepfake Detection</h3>
+    <!-- File Upload Form -->
+    <form class="text-center mb-4" method="POST" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn btn-primary">Upload Image</button>
+    </form>
+
+    <!-- Display Results -->
+    {% if result %}
+        <div class="mt-4 p-4 bg-light border rounded">
+            <h4><strong>Result:</strong> {{ result }}</h4>
+            <p><strong>Confidence:</strong> {{ confidence }}%</p>
+            <p><strong>File Name:</strong> {{ file_name }}</p>
+            
+            <div class="mt-3">
+                <h5>Uploaded Image</h5>
+                <img src="{{ uploaded_image_url }}" alt="Uploaded Image" class="img-thumbnail" style="max-width: 300px; height: auto;">
+            </div>
+        </div>
+    {% endif %}
+</div>
+<section class="featured-services section py-5">
+    <div class="container text-center" data-aos="fade-up">
+        <!-- Section Heading -->
+        <h2 class="mb-4">Detect Deep Fake Easily in Seconds</h2>
+        <div class="row gy-4">
+            <!-- Feature 1: Upload Instantly -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-item item-cyan position-relative">
+                    <div class="icon">
+                        <i class="bi bi-upload"></i>
+                    </div>
+                    <h3>Upload Instantly</h3>
+                    <p>Upload your audio and pictures in one click to start detection.</p>
+                </div>
+            </div>
+
+            <!-- Feature 2: Crop Faces Automatically -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-item item-orange position-relative">
+                    <div class="icon">
+                        <i class="bi bi-aspect-ratio"></i>
+                    </div>
+                    <h3>Crop Faces Automatically</h3>
+                    <p>Automatically focuses on faces to enhance detection accuracy.</p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Easy to Use -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-item item-teal position-relative">
+                    <div class="icon">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p>Designed for intuitive user experience, providing results in seconds.</p>
+                </div>
+            </div>
+
+            <!-- Feature 4: Privacy & Security -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-item item-red position-relative">
+                    <div class="icon">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h3>Privacy & Security</h3>
+                    <p>Your uploads are secure and processed confidentially for privacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="my-5 text-dark section light-background">
+    <!-- Section Heading -->
+     <div class="container">
+    <h2 class="text-center font-weight-bold mb-4 ">Other ways to spot deepfakes</h2>
+    <p class="text-center text-dark mb-5">
+        Deepfakes are becoming higher in quality while being easier and cheaper to make. It consequently becomes harder to spot deepfakes with the naked eye. However, at this moment you can still look for several typical graphic inconsistencies (called artefacts) in deepfakes. The typical artefacts to look for are listed below.
+    </p>
+
+    <!-- Image and Analysis Section -->
+    <div class="row mb-5">
+        <!-- Left Side Single Image -->
+        <div class="col-md-6 text-center">
+            <div class="image-container original border rounded" alt="Deepfake Example"></div>
+            <!-- <p class="mt-2 text-dark">Original Image with Localized Face, Cropped Face, Heatmap, and Overlay</p> -->
+        </div>
+
+        <!-- Right Side Cards -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Colour Transition</h5>
+                    <p class="card-text text-dark">
+                        In neural puppetry and faceswap deepfakes, the face is manipulated. Sometimes a hard color transition can be seen on the edges of the area the deepfake software manipulated.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Accessories</h5>
+                    <p class="card-text text-dark">
+                        Items like glasses might look convincing at first, but when looked closer, might actually contain some artefacts.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Blurry Background or Context</h5>
+                    <p class="card-text text-dark">
+                        StyleGAN deepfakes are good in making faces, but bad at creating context that makes sense. Check the background and clothing, for example, to see if these make any sense.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Unnatural Looking Eyes</h5>
+                    <p class="card-text text-dark">
+                        Eyes are rather hard to deepfake due to their complexity. Check if the reflections in the eyes have the same angle. Does the person in the video blink? Are the irises of both eyes equally large?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+<!-- Additional Cards Section -->
+<!-- <div class="row text-center mb-5">
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4" style="width: 100%;">
+            <img src="{% static 'img/fake-profile.jpg' %}" class="card-img-top" alt="Analysis">
+            <div class="card-body">
+                <p class="card-text">Comprehensive analysis using AI algorithms to detect even the slightest manipulations in images.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4" style="width: 100%;">
+            <img src="{% static 'img/fake-id.jpg' %}" class="card-img-top" alt="Quick Results">
+            <div class="card-body">
+                <p class="card-text">Quick and accurate results to help you verify the authenticity of images within seconds.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4" style="width: 100%;">
+            <img src="{% static 'img/fake-news.jpg' %}" class="card-img-top" alt="User-Friendly">
+            <div class="card-body">
+                <p class="card-text">Easy to use interface designed to provide a seamless experience for users.</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- How It Works Section -->
+<section class="how-it-works mt-5">
+    <h3 class="text-center mb-4">How Does Image Deepfake Detection Work?</h3>
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 1: Image Upload</h5>
+                <p class="card-text">
+                    Upload an image file, and our system begins by preprocessing the data, analyzing pixels, textures, and other visual features.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 2: AI-Powered Analysis</h5>
+                <p class="card-text">
+                    Our AI model examines patterns in the image to detect abnormalities, comparing it against authentic image samples and known deepfake patterns.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card shadow-sm p-3 h-100">
+                <h5 class="card-title">Step 3: Results and Insights</h5>
+                <p class="card-text">
+                    The analysis provides a result indicating the likelihood of the image being a deepfake, along with insights on detected artifacts or manipulations.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<script>
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const imagePreview = document.getElementById('image-preview');
+
+// Highlight drop area when file is dragged over it
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('bg-light');
+    dropArea.classList.add('border-success');
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.classList.remove('bg-light');
+    dropArea.classList.remove('border-success');
+});
+
+// Handle dropped files
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('bg-light');
+    dropArea.classList.remove('border-success');
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;  // Assign the dropped file to the file input
+        displayImage(files[0]);   // Display the image
+    }
+});
+
+// Click event to open file input dialog when the drop area is clicked
+dropArea.addEventListener('click', () => {
+    fileInput.click();
+});
+
+// Update preview when a file is selected via file input
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (file) {
+        displayImage(file);  // Display the image
+    }
+});
+
+// Function to display the selected image
+function displayImage(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        imagePreview.src = e.target.result;  // Set the image source to the file's data URL
+        imagePreview.style.display = 'block'; // Show the image
+    }
+    reader.readAsDataURL(file);  // Read the file as a data URL
+}
+</script>
+
+{% endblock %}

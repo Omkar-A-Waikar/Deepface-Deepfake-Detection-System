@@ -1,0 +1,402 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="hero section dark-background">
+  <div id="hero-carousel" class="carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="container position-relative">
+      <!-- Carousel Items -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2>DEEPFAKE DETECTION</h2>
+          <p>Detect Deep Fake in Your Pictures and Audio</p>
+          <a href="#deepfake" class="btn-get-started">Read More</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2>What is DeepFake?</h2>
+          <p>Check out more information on deepfakes.</p>
+          <a href="#deepfake" class="btn-get-started">Read More</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2>Image and Audio Detection</h2>
+          <p>Check out the latest image and audio models!</p>
+          <a href="#deepfake" class="btn-get-started">Read More</a>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+    </a>
+  </div>
+</section>
+
+
+<section class="featured-services section py-5">
+    <div class="container text-center" data-aos="fade-up">
+        <!-- Section Heading -->
+        <h2 class="mb-4">Detect Deep Fake Easily in Seconds</h2>
+        <div class="row gy-4">
+            <!-- Feature 1: Upload Instantly -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-item item-cyan position-relative">
+                    <div class="icon">
+                        <i class="bi bi-upload"></i>
+                    </div>
+                    <h3>Upload Instantly</h3>
+                    <p>Upload your audio and pictures in one click to start detection.</p>
+                </div>
+            </div>
+
+            <!-- Feature 2: Crop Faces Automatically -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-item item-orange position-relative">
+                    <div class="icon">
+                        <i class="bi bi-aspect-ratio"></i>
+                    </div>
+                    <h3>Crop Faces Automatically</h3>
+                    <p>Automatically focuses on faces to enhance detection accuracy.</p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Easy to Use -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-item item-teal position-relative">
+                    <div class="icon">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p>Designed for intuitive user experience, providing results in seconds.</p>
+                </div>
+            </div>
+
+            <!-- Feature 4: Privacy & Security -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-item item-red position-relative">
+                    <div class="icon">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h3>Privacy & Security</h3>
+                    <p>Your uploads are secure and processed confidentially for privacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5 text-center">
+    <!-- Section Heading -->
+    <h2 class="font-weight-bold mb-4" data-aos="fade-up">Detect deepfakes to prevent manipulation, fraud, abuse, and spam.</h2>
+
+    <!-- Row for Cards -->
+    <div class="row justify-content-center gy-4">
+        <!-- Card 1: Mis- & Disinformation -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card shadow-sm text-white overlay-card bg-misinformation">
+                <div class="overlay-label">MIS- & DISINFORMATION</div>
+                <div class="card-img-overlay d-flex align-items-end">
+                    <p class="card-text">Spreading deepfakes in media to manipulate public opinion.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Fake Profiles -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card shadow-sm text-white overlay-card bg-fake-profiles">
+                <div class="overlay-label">FAKE PROFILES</div>
+                <div class="card-img-overlay d-flex align-items-end">
+                    <p class="card-text">Scamming and extorting users with fake profiles on social networks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Fake IDs -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card shadow-sm text-white overlay-card bg-fake-ids">
+                <div class="overlay-label">FAKE IDS</div>
+                <div class="card-img-overlay d-flex align-items-end">
+                    <p class="card-text">Forging ID documents to bypass onboarding checks or take over accounts.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: Impersonation -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="card shadow-sm text-white overlay-card bg-impersonation">
+                <div class="overlay-label">IMPERSONATION</div>
+                <div class="card-img-overlay d-flex align-items-end">
+                    <p class="card-text">Misleading viewers by representing someone without their consent.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: Nudification -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="card shadow-sm text-white overlay-card bg-nudification">
+                <div class="overlay-label">NUDIFICATION</div>
+                <div class="card-img-overlay d-flex align-items-end">
+                    <p class="card-text">Creating fake nude images of people without their consent.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6: Fake News -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+            <div class="card shadow-sm text-white overlay-card bg-fake-news">
+                <div class="overlay-label">FAKE NEWS</div>
+                <div class="card-img-overlay d-flex align-items-end">
+                    <p class="card-text">Spreading fake news to harm democratic processes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="deepfake" class="container my-5">
+    <!-- Section Heading -->
+    <h2 class="text-dark font-weight-bold text-center" data-aos="fade-up">What is a Deepfake?</h2>
+    <div class="underline mx-auto mt-2 mb-4" style="width: 80px; height: 3px; background-color: #4C4FD9;" data-aos="fade-up" data-aos-delay="100"></div>
+
+    <p class="text-muted text-center mb-5" data-aos="fade-up" data-aos-delay="200">
+        Deepfakes come in many shapes and forms, and can serve different purposes. Most deepfakes are generated using a combination of the following 3 types of actions:
+    </p>
+    
+    <!-- Info Cards Section -->
+    <div class="row gy-4">
+        <!-- AI Generation Card -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card shadow-lg border-0 h-100 service-item item-cyan position-relative">
+                <div class="card-body text-center">
+                    <div class="icon mb-3">
+                        <i class="bi bi-cpu text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h5 class="card-title font-weight-bold text-dark">AI-GENERATION</h5>
+                    <p class="card-text text-muted">
+                        AI-generated images and videos are created by AI models such as Diffusion models (Stable Diffusion, MidJourney, Flux...) or GANs.
+                    </p>
+                    <p class="card-text text-muted">
+                        AI models can modify parts of an image (inpainting) or extend it (outpainting).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Face Swaps Card -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="card shadow-lg border-0 h-100 service-item item-orange position-relative">
+                <div class="card-body text-center">
+                    <div class="icon mb-3">
+                        <i class="bi bi-person-bounding-box text-warning" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h5 class="card-title font-weight-bold text-dark">FACE SWAPS</h5>
+                    <p class="card-text text-muted">
+                        Face swaps consist of replacing a person’s face in a real image or video with another person’s face, adapting angle, lighting, and expressions.
+                    </p>
+                    <p class="card-text text-muted">
+                        Results can be extremely convincing with modern AI models.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Face Manipulations Card -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="card shadow-lg border-0 h-100 service-item item-teal position-relative">
+                <div class="card-body text-center">
+                    <div class="icon mb-3">
+                        <i class="bi bi-emoji-smile text-info" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h5 class="card-title font-weight-bold text-dark">FACE MANIPULATIONS</h5>
+                    <p class="card-text text-muted">
+                        Face manipulations involve modifying a person's face, emotions, or lip movements using AI algorithms, like lip-sync models for speech adaptation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-5 text-dark section light-background">
+    <!-- Section Heading -->
+     <div class="container">
+    <h2 class="text-center font-weight-bold mb-4 ">Other ways to spot deepfakes</h2>
+    <p class="text-center text-dark mb-5">
+        Deepfakes are becoming higher in quality while being easier and cheaper to make. It consequently becomes harder to spot deepfakes with the naked eye. However, at this moment you can still look for several typical graphic inconsistencies (called artefacts) in deepfakes. The typical artefacts to look for are listed below.
+    </p>
+
+    <!-- Image and Analysis Section -->
+    <div class="row mb-5">
+        <!-- Left Side Single Image -->
+        <div class="col-md-6 text-center">
+            <div class="image-container original border rounded" alt="Deepfake Example"></div>
+            <!-- <p class="mt-2 text-dark">Original Image with Localized Face, Cropped Face, Heatmap, and Overlay</p> -->
+        </div>
+
+        <!-- Right Side Cards -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Colour Transition</h5>
+                    <p class="card-text text-dark">
+                        In neural puppetry and faceswap deepfakes, the face is manipulated. Sometimes a hard color transition can be seen on the edges of the area the deepfake software manipulated.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Accessories</h5>
+                    <p class="card-text text-dark">
+                        Items like glasses might look convincing at first, but when looked closer, might actually contain some artefacts.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Blurry Background or Context</h5>
+                    <p class="card-text text-dark">
+                        StyleGAN deepfakes are good in making faces, but bad at creating context that makes sense. Check the background and clothing, for example, to see if these make any sense.
+                    </p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Unnatural Looking Eyes</h5>
+                    <p class="card-text text-dark">
+                        Eyes are rather hard to deepfake due to their complexity. Check if the reflections in the eyes have the same angle. Does the person in the video blink? Are the irises of both eyes equally large?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+
+
+<!-- About Section -->
+<!-- <section id="about" class="about section light-background">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
+        <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="">
+        <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+      </div>
+      <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
+        <h3>Voluptatem dignissimos provident...</h3>
+        <ul>
+          <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi...</li>
+          <li><i class="bi bi-check2-all"></i> Duis aute irure dolor...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Features Section -->
+<!-- <section id="features" class="features section">
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Features</h2>
+    <p>Necessitatibus eius consequatur ex aliquid fuga...</p>
+  </div>
+  <div class="container">
+    <div class="row gy-4 align-items-center features-item">
+      <div class="col-md-5" data-aos="zoom-out" data-aos-delay="100">
+        <img src="{% static 'img/features-1.svg' %}" class="img-fluid" alt="">
+      </div>
+      <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+        <h3>Voluptatem dignissimos provident...</h3>
+        <ul>
+          <li><i class="bi bi-check"></i> Ullamco laboris nisi...</li>
+          <li><i class="bi bi-check"></i> Duis aute irure dolor...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="additional-features py-5 bg-dark">
+    <div class="container text-center">
+        <h2 class="mb-4 text-white">Features</h2>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Real-Time Deep Fake Detection</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Comprehensive Media Analysis</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Multi-Format Support</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">User-Friendly Interface</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Batch Processing</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Privacy and Data Security</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Detailed Reporting and Insights</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body">Mobile Compatibility</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .overlay-card {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 250px; /* Set height for the card */
+    }
+    .overlay-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #ffffff;
+        color: #000000;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+    }
+    .card-img-overlay {
+        background: rgba(0, 0, 0, 0.6); /* Dark overlay for text readability */
+        border-radius: 8px;
+    }
+    .card-text {
+        font-size: 0.9rem;
+        margin: 0;
+        color: #f8f9fa;
+    }
+</style>
+
+
+{% endblock %}
