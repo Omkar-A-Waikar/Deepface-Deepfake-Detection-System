@@ -1,9 +1,4 @@
 #!/usr/bin/env python
-""" Downloads FaceForensics++ and Deep Fake Detection public data release
-Example usage:
-    see -h or https://github.com/ondyari/FaceForensics
-"""
-# -*- coding: utf-8 -*-
 import argparse
 import os
 import urllib
@@ -16,13 +11,10 @@ import random
 from tqdm import tqdm
 from os.path import join
 
-
-# URLs and filenames
 FILELIST_URL = 'misc/filelist.json'
 DEEPFEAKES_DETECTION_URL = 'misc/deepfake_detection_filenames.json'
 DEEPFAKES_MODEL_NAMES = ['decoder_A.h5', 'decoder_B.h5', 'encoder.h5',]
 
-# Parameters
 DATASETS = {
     'original_youtube_videos': 'misc/downloaded_youtube_videos.zip',
     'original_youtube_videos_info': 'misc/downloaded_youtube_videos_info.zip',
@@ -78,7 +70,6 @@ def parse_args():
                         )
     args = parser.parse_args()
 
-    # URLs
     server = args.server
     if server == 'EU':
         server_url = 'http://canis.vc.in.tum.de:8100/'
@@ -135,7 +126,6 @@ def download_file(url, out_file, report_progress=False):
 
 
 def main(args):
-    # TOS
     print('By pressing any key to continue you confirm that you have agreed '\
           'to the FaceForensics terms of use as described at:')
     print(args.tos_url)
@@ -143,7 +133,6 @@ def main(args):
     print('Press any key to continue, or CTRL-C to exit.')
     _ = input('')
 
-    # Extract arguments
     c_datasets = [args.dataset] if args.dataset != 'all' else ALL_DATASETS
     c_type = args.type
     c_compression = args.compression
@@ -151,10 +140,8 @@ def main(args):
     output_path = args.output_path
     os.makedirs(output_path, exist_ok=True)
 
-    # Check for special dataset cases
     for dataset in c_datasets:
         dataset_path = DATASETS[dataset]
-        # Special cases
         if 'original_youtube_videos' in dataset:
             # Here we download the original youtube videos zip file
             print('Downloading original youtube videos.')
@@ -170,12 +157,10 @@ def main(args):
                           report_progress=True)
             return
 
-        # Else: regular datasets
         print('Downloading {} of dataset "{}"'.format(
             c_type, dataset_path
         ))
 
-        # Get filelists and video lenghts list from server
         if 'DeepFakeDetection' in dataset_path or 'actors' in dataset_path:
         	filepaths = json.loads(urllib.request.urlopen(args.base_url + '/' +
                 DEEPFEAKES_DETECTION_URL).read().decode("utf-8"))
@@ -191,7 +176,6 @@ def main(args):
             for pair in file_pairs:
             	filelist += pair
         else:
-            # Load filelist from server
             file_pairs = json.loads(urllib.request.urlopen(args.base_url + '/' +
                 FILELIST_URL).read().decode("utf-8"))
             # Get filelist
@@ -234,20 +218,14 @@ def main(args):
                 return
             filelist = [filename + '.mp4' for filename in filelist]
             download_files(filelist, dataset_mask_url, dataset_output_path)
-
-        # Else: models for deepfakes
         else:
             if dataset != 'Deepfakes' and c_type == 'models':
                 print('Models only available for Deepfakes. Aborting')
                 return
             dataset_output_path = join(output_path, dataset_path, c_type)
             print('Output path: {}'.format(dataset_output_path))
-
-            # Get Deepfakes models
             for folder in tqdm(filelist):
                 folder_filelist = DEEPFAKES_MODEL_NAMES
-
-                # Folder paths
                 folder_base_url = args.deepfakes_model_url + folder + '/'
                 folder_dataset_output_path = join(dataset_output_path,
                                                   folder)
