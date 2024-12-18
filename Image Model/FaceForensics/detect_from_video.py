@@ -1,15 +1,3 @@
-"""
-Evaluates a folder of video files or a single file with a xception binary
-classification network.
-
-Usage:
-python detect_from_video.py
-    -i <folder with video files or path to video file>
-    -m <path to model file>
-    -o <path to output folder, will write one or multiple output videos there>
-
-Author: Andreas Rössler
-"""
 import os
 import argparse
 from os.path import join
@@ -25,15 +13,6 @@ from dataset.transform import xception_default_data_transforms
 
 
 def get_boundingbox(face, width, height, scale=1.3, minsize=None):
-    """
-    Expects a dlib face to generate a quadratic bounding box.
-    :param face: dlib face class
-    :param width: frame width
-    :param height: frame height
-    :param scale: bounding box size multiplier to get a bigger face region
-    :param minsize: set minimum bounding box size
-    :return: x, y, bounding_box_size in opencv form
-    """
     x1 = face.left()
     y1 = face.top()
     x2 = face.right()
@@ -55,14 +34,6 @@ def get_boundingbox(face, width, height, scale=1.3, minsize=None):
 
 
 def preprocess_image(image, cuda=True):
-    """
-    Preprocesses the image such that it can be fed into our network.
-    During this process we envoke PIL to cast it into a PIL image.
-
-    :param image: numpy image in opencv form (i.e., BGR and of shape
-    :return: pytorch tensor of shape [1, 3, image_size, image_size], not
-    necessarily casted to cuda
-    """
     # Revert from BGR
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     # Preprocess using the preprocessing function used during training and
@@ -78,16 +49,6 @@ def preprocess_image(image, cuda=True):
 
 def predict_with_model(image, model, post_function=nn.Softmax(dim=1),
                        cuda=True):
-    """
-    Predicts the label of an input image. Preprocesses the input image and
-    casts it to cuda if required
-
-    :param image: numpy image
-    :param model: torch model with linear layer at the end
-    :param post_function: e.g., softmax
-    :param cuda: enables cuda, must be the same parameter as the model
-    :return: prediction (1 = fake, 0 = real)
-    """
     # Preprocess
     preprocessed_image = preprocess_image(image, cuda)
 
@@ -104,18 +65,6 @@ def predict_with_model(image, model, post_function=nn.Softmax(dim=1),
 
 def test_full_image_network(video_path, model_path, output_path,
                             start_frame=0, end_frame=None, cuda=True):
-    """
-    Reads a video and evaluates a subset of frames with the a detection network
-    that takes in a full frame. Outputs are only given if a face is present
-    and the face is highlighted using dlib.
-    :param video_path: path to video file
-    :param model_path: path to model file (should expect the full sized image)
-    :param output_path: path where the output video is stored
-    :param start_frame: first frame to evaluate
-    :param end_frame: last frame to evaluate
-    :param cuda: enable cuda
-    :return:
-    """
     print('Starting: {}'.format(video_path))
 
     # Read and write
