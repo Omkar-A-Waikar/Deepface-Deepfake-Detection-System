@@ -16,14 +16,6 @@ train_ratio = 0.8  # Training set ratio
 (output_dataset_path / "test" / "FAKE").mkdir(parents=True, exist_ok=True)
 
 def extract_frames(video_path, output_folder, label, split, interval_in_seconds=4):
-    """
-    Extract frames from a video at specified intervals and save them to the specified folder.
-    :param video_path: Path to the video file
-    :param output_folder: Path to the output folder
-    :param label: Label ('REAL' or 'FAKE')
-    :param split: 'train' or 'test', indicating which set to save frames into
-    :param interval_in_seconds: Number of seconds between each extracted frame
-    """
     video_capture = cv2.VideoCapture(str(video_path))
     fps = video_capture.get(cv2.CAP_PROP_FPS)
     interval = int(fps * interval_in_seconds)  # Calculate the interval in frames
@@ -42,9 +34,6 @@ def extract_frames(video_path, output_folder, label, split, interval_in_seconds=
     video_capture.release()
 
 def process_video(video_file, label, split, interval_in_seconds=2):
-    """
-    Wrapper function to process a single video, used for multithreading.
-    """
     extract_frames(video_file, output_dataset_path, label, split, interval_in_seconds)
 
 original_videos = list(original_videos_path.glob("*.mp4"))
@@ -61,19 +50,15 @@ test_manipulated_videos = manipulated_videos[int(len(manipulated_videos) * train
 
 num_threads = 12  # You can adjust this based on your system's capabilities
 with ThreadPoolExecutor(max_workers=num_threads) as executor:
-    # Submit tasks for training set (REAL videos)
     for video_file in train_original_videos:
         executor.submit(process_video, video_file, "REAL", "train", interval_in_seconds)
 
-    # Submit tasks for testing set (REAL videos)
     for video_file in test_original_videos:
         executor.submit(process_video, video_file, "REAL", "test", interval_in_seconds)
 
-    # Submit tasks for training set (FAKE videos)
     for video_file in train_manipulated_videos:
         executor.submit(process_video, video_file, "FAKE", "train", interval_in_seconds)
 
-    # Submit tasks for testing set (FAKE videos)
     for video_file in test_manipulated_videos:
         executor.submit(process_video, video_file, "FAKE", "test", interval_in_seconds)
 
