@@ -19,3 +19,7 @@ class SignUpForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(widget=forms.PasswordInput)
+
+#OTP verification form
+class OTPForm(forms.Form):
+    otp = forms.CharField(max_length=6, label="Enter OTP")
