@@ -13,11 +13,9 @@ model, feature_extractor = load_model(model_id=model_path)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-# Load the test dataset
 test_dataset = CustomImageDataset(img_dir=test_data_dir, feature_extractor=feature_extractor)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
-# Function to perform model evaluation
 def evaluate(model, dataloader, device):
     model.eval()
     all_preds = []
@@ -34,10 +32,8 @@ def evaluate(model, dataloader, device):
 
     return all_labels, all_preds
 
-# Run evaluation
 true_labels, pred_labels = evaluate(model, test_loader, device)
 
-# Calculate performance metrics
 accuracy = accuracy_score(true_labels, pred_labels)
 precision = precision_score(true_labels, pred_labels, average='binary')
 recall = recall_score(true_labels, pred_labels, average='binary')
