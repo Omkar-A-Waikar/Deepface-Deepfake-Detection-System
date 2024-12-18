@@ -4,14 +4,12 @@ from pathlib import Path
 import random
 from concurrent.futures import ThreadPoolExecutor
 
-# Define input and output paths
 original_videos_path = Path("F:/FF_Dataset/original_sequences/actors/c23/videos")
 manipulated_videos_path = Path("F:/FF_Dataset/manipulated_sequences/DeepFakeDetection/c23/videos")
 output_dataset_path = Path("F:/FF_Dataset/processed_frames")
 interval_in_seconds = 4  # Interval in seconds for extracting frames
 train_ratio = 0.8  # Training set ratio
 
-# Create output directories
 (output_dataset_path / "train" / "REAL").mkdir(parents=True, exist_ok=True)
 (output_dataset_path / "train" / "FAKE").mkdir(parents=True, exist_ok=True)
 (output_dataset_path / "test" / "REAL").mkdir(parents=True, exist_ok=True)
@@ -49,11 +47,9 @@ def process_video(video_file, label, split, interval_in_seconds=2):
     """
     extract_frames(video_file, output_dataset_path, label, split, interval_in_seconds)
 
-# Get list of all video files
 original_videos = list(original_videos_path.glob("*.mp4"))
 manipulated_videos = list(manipulated_videos_path.glob("*.mp4"))
 
-# Shuffle and split videos into training and testing sets
 random.shuffle(original_videos)
 random.shuffle(manipulated_videos)
 
@@ -63,10 +59,7 @@ test_original_videos = original_videos[int(len(original_videos) * train_ratio):]
 train_manipulated_videos = manipulated_videos[:int(len(manipulated_videos) * train_ratio)]
 test_manipulated_videos = manipulated_videos[int(len(manipulated_videos) * train_ratio):]
 
-# Define the number of threads to use
 num_threads = 12  # You can adjust this based on your system's capabilities
-
-# Process videos with multithreading
 with ThreadPoolExecutor(max_workers=num_threads) as executor:
     # Submit tasks for training set (REAL videos)
     for video_file in train_original_videos:
