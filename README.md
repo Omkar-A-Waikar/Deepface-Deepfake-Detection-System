@@ -3,7 +3,9 @@
 
 This is a Django-based project that enables **image deepfake detection** and **audio deepfake detection** using pre-trained PyTorch models. It also includes **user authentication features** like sign-up, login, and logout.
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/Omkar-A-Waikar/Team4-SE/blob/main/UI/images/homepg_ui.jpeg)
+![alt text](https://github.com/Omkar-A-Waikar/Team4-SE/blob/main/UI/images/image_ui.jpeg)
+![alt text](https://github.com/Omkar-A-Waikar/Team4-SE/blob/main/UI/images/audio_ui.jpeg)
 
 **Features**
 ------------
@@ -74,15 +76,14 @@ Make sure you have the following installed on your system:
     
 
 ### **2\. Clone the Repository**
-
-bash`   git clone https://github.com/yourusername/deepfake-detection.git  cd UI   `
+`git clone https://github.com/yourusername/deepfake-detection.git  
+cd UI `
 
 ### **3\. Create a Virtual Environment**
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   python3 -m venv venv  source venv/bin/activate    # For Linux/Mac  venv\Scripts\activate       # For Windows   `
+` python3 -m venv venv  source venv/bin/activate   # For Linux/Mac  venv\Scripts\activate       # For Windows   `
 
 ### **4\. Install Dependencies**
 
 Install all required Python packages using pip:
-
-Plain `   pip install -r requirements.txt   `
+ ` pip install -r requirements.txt `
